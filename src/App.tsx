@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import Markdown from './Markdown';
 import Preview from './Preview';
 
@@ -7,29 +6,44 @@ function App() {
   const storedInput = localStorage.getItem('Input');
   const [input, setInput] = useState(storedInput ? storedInput : '');
   const [showPreview, setShowPreview] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const handleShowPreview = () => {
     setShowPreview((prevShowPreview) => !prevShowPreview);
   };
-  const addToLocalStorage = (input: string) => {
-    setInput(input);
-    localStorage.setItem('Input', input);
+
+  const addToLocalStorage = (inputValue: string) => {
+    setInput(inputValue);
+    localStorage.setItem('Input', inputValue);
   };
 
   useEffect(() => {
     const handleResize = () => {
-      setShowPreview(window.innerWidth >= 640);
+      const smallScreen = window.innerWidth <= 640;
+      setIsSmallScreen(smallScreen);
+      setShowPreview(!smallScreen);
     };
+
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   return (
-    <main className="flex min-h-screen flex-col bg-gray-200 sm:flex-row ">
-      {showPreview ? (
-        <Preview input={input} onIconClick={handleShowPreview} />
+    <main className="flex min-h-screen bg-gray-200">
+      {isSmallScreen ? (
+        showPreview ? (
+          <Preview input={input} onIconClick={handleShowPreview} />
+        ) : (
+          <Markdown
+            input={input}
+            onInputChange={addToLocalStorage}
+            onIconClick={handleShowPreview}
+          />
+        )
       ) : (
         <>
           <Markdown
@@ -43,5 +57,4 @@ function App() {
     </main>
   );
 }
-
 export default App;

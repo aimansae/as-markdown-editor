@@ -85,3 +85,50 @@ In tailwind.config.css add:
 npm i react-markdown
 
 
+### TroubleShooting
+
+While running npm test encountered error: 
+ReferenceError: require is not defined in ES module scope, you can use import instead
+This file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\saeed\OneDrive\Desktop\Projects 2024\Markdown Editor\react-starter-project\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+
+**Fixed**:
+
+Replaced jest.config.js with jest-setup.ts and added:
+      import '@testing-library/jest-dom'
+      ['<rootDir>/jest-setup.js']
+In package.json added after vite:
+
+      "vite": "^5.1.0"
+  },
+  
+  "jest": {
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/node_modules/jest-transform-stub"
+    }
+  },
+  "include": [
+    "./jest-setup.ts"
+  ]
+
+
+Error: 
+   Validation Error:
+
+  Module <rootDir>/node_modules/jest-transform-stub in the transform option was not found.
+         <rootDir> is: C:\Users\saeed\OneDrive\Desktop\Projects 
+2024\Markdown Editor\react-starter-project
+
+  Configuration Documentation:
+  https://jestjs.io/docs/configuration
+
+**Fixed**
+
+   npm install --save-dev jest-transform-stub
+
+make sure to update your package.json to include it as a transform module.          
+   transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.css$': 'jest-transform-stub', // Add this line for CSS files if needed
+  },

@@ -5,8 +5,9 @@ type MarkdownProps = {
   input: string;
   onInputChange: (value: string) => void;
   onIconClick: MouseEventHandler<SVGElement>;
-}
-const Markdown = ({ input, onInputChange,onIconClick }: MarkdownProps) => {
+};
+
+const Markdown = ({ input, onInputChange, onIconClick }: MarkdownProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -22,9 +23,7 @@ const Markdown = ({ input, onInputChange,onIconClick }: MarkdownProps) => {
   };
   return (
     <div className="sm:w-1/2border-r-2 flex-1 border-r-2  border-gray-300">
-      <Heading onIconClick={onIconClick}>
-        Markdown
-      </Heading>
+      <Heading onIconClick={onIconClick}>Markdown</Heading>
       <label htmlFor="textarea" className="sr-only">
         Enter text here
       </label>
@@ -39,5 +38,4 @@ const Markdown = ({ input, onInputChange,onIconClick }: MarkdownProps) => {
     </div>
   );
 };
-
 export default Markdown;

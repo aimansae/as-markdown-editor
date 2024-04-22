@@ -14,5 +14,4 @@ const Heading = ({ children, onIconClick }: HeadingProps) => {
     </header>
   );
 };
-
 export default Heading;
