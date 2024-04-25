@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
-import Markdown from './Markdown';
-import Preview from './Preview';
+import Markdown from './components/Markdown';
+import Preview from './components/Preview';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 function App() {
-  const storedInput = localStorage.getItem('Input');
-  const [input, setInput] = useState(storedInput ? storedInput : '');
+  const { value: input, setItem: setInput } = useLocalStorage('Input');
   const [showPreview, setShowPreview] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const handleShowPreview = () => {
     setShowPreview((prevShowPreview) => !prevShowPreview);
-  };
-
-  const addToLocalStorage = (inputValue: string) => {
-    setInput(inputValue);
-    localStorage.setItem('Input', inputValue);
   };
 
   useEffect(() => {
@@ -40,7 +35,7 @@ function App() {
         ) : (
           <Markdown
             input={input}
-            onInputChange={addToLocalStorage}
+            onInputChange={setInput}
             onIconClick={handleShowPreview}
           />
         )
@@ -48,7 +43,7 @@ function App() {
         <>
           <Markdown
             input={input}
-            onInputChange={addToLocalStorage}
+            onInputChange={setInput}
             onIconClick={handleShowPreview}
           />
           <Preview input={input} onIconClick={handleShowPreview} />
