@@ -78,57 +78,87 @@ Before you start with this task, research what Markdown format is.
    npm i -D @tailwindcss/typography
 
 In tailwind.config.css add:
-    plugins: [require('@tailwindcss/typography')]
+plugins: [require('@tailwindcss/typography')]
 
 ## [React markdown package](https://www.npmjs.com/package/react-markdown/v/8.0.6)
 
 npm i react-markdown
 
+### [Testing user event](https://testing-library.com/docs/user-event/install)
+npm install --save-dev @testing-library/user-event
 
 ### TroubleShooting
 
-While running npm test encountered error: 
+- While running npm test encountered error:
 ReferenceError: require is not defined in ES module scope, you can use import instead
 This file is being treated as an ES module because it has a '.js' file extension and 'C:\Users\saeed\OneDrive\Desktop\Projects 2024\Markdown Editor\react-starter-project\package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
 
 **Fixed**:
 
 Replaced jest.config.js with jest-setup.ts and added:
-      import '@testing-library/jest-dom'
-      ['<rootDir>/jest-setup.js']
+import '@testing-library/jest-dom'
+['<rootDir>/jest-setup.js']
 In package.json added after vite:
 
       "vite": "^5.1.0"
-  },
-  
-  "jest": {
-    "testEnvironment": "jsdom",
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest",
+
+
+"jest": {
+"testEnvironment": "jsdom",
+"transform": {
+"^.+\\.tsx?$": "ts-jest",
       "^.+\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/node_modules/jest-transform-stub"
-    }
-  },
-  "include": [
-    "./jest-setup.ts"
-  ]
+}
+},
+"include": [
+"./jest-setup.ts"
+]
 
+- Validation Error:
 
-Error: 
-   Validation Error:
-
-  Module <rootDir>/node_modules/jest-transform-stub in the transform option was not found.
-         <rootDir> is: C:\Users\saeed\OneDrive\Desktop\Projects 
+Module <rootDir>/node_modules/jest-transform-stub in the transform option was not found.
+<rootDir> is: C:\Users\saeed\OneDrive\Desktop\Projects
 2024\Markdown Editor\react-starter-project
 
-  Configuration Documentation:
-  https://jestjs.io/docs/configuration
+Configuration Documentation:
+https://jestjs.io/docs/configuration
+
 
 **Fixed**
 
-   npm install --save-dev jest-transform-stub
+npm install --save-dev jest-transform-stub
 
-make sure to update your package.json to include it as a transform module.          
-   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
+make sure to update your package.json to include it as a transform module.  
+ transform: {
+'^.+\\.jsx?$': 'babel-jest',
     '^.+\\.css$': 'jest-transform-stub', // Add this line for CSS files if needed
+},
+
+
+- While running npm test encountered the followed error
+![Jest Error](/react-starter-project/src/assets/markdown-error.PNG)
+
+**Fixed** 
+
+Followed Option 1 solution from [Github react-markdown remarks](https://github.com/remarkjs/react-markdown/issues/635#issuecomment-956158474)
+
+In src folder, created __mocks__
+directory and within it created a react-markdown.tsx file with:
+
+import React from "react";
+interface ReactMarkdownProps {
+  children: React.ReactNode;
+}
+function ReactMarkdown({ children }: ReactMarkdownProps) {
+  return <>{children}</>;
+}
+export default ReactMarkdown;
+
+Created  Jest.config.ts added:
+added module.exports = {
+  moduleNameMapper: {
+    "^react-markdown$": "<rootDir>/src/__mocks__/react-markdown.tsx",
   },
+};
+
+While runninh tests for Markwown test area change input, It seems like the onInputChangeMock function is being called multiple times with partial input values, instead of the complete input value. This suggests that there might be an issue with how the debouncing mechanism is implemented.

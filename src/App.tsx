@@ -33,19 +33,11 @@ function App() {
         showPreview ? (
           <Preview input={input} onIconClick={handleShowPreview} />
         ) : (
-          <Markdown
-            input={input}
-            onInputChange={setInput}
-            onIconClick={handleShowPreview}
-          />
+          <Markdown input={input} onInputChange={setInput} onIconClick={handleShowPreview} />
         )
       ) : (
         <>
-          <Markdown
-            input={input}
-            onInputChange={setInput}
-            onIconClick={handleShowPreview}
-          />
+          <Markdown input={input} onInputChange={setInput} onIconClick={handleShowPreview} />
           <Preview input={input} onIconClick={handleShowPreview} />
         </>
       )}
