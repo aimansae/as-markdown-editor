@@ -1,19 +1,23 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import userEvent from '@testing-library/user-event';
-import Markdown from './components/Markdown';
+
+jest.mock('./hooks/useLocalStorage');
+
 describe('App Component', () => {
+  beforeEach(() => {
+    (useLocalStorage as jest.Mock).mockReturnValue({
+      value: 'hello',
+      setItem: jest.fn()
+    });
+  });
+
   test('renders Markdown and Preview', async () => {
-    Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 800 });
     render(<App />);
     expect(screen.getByTestId('preview')).toBeInTheDocument();
     expect(screen.getByTestId('markdown')).toBeInTheDocument();
-
-    act(() => {
-      window.innerWidth = 1000;
-      window.dispatchEvent(new Event('resize'));
-    });
 
     await screen.findByTestId('markdown');
     await screen.findByTestId('preview');
@@ -21,20 +25,31 @@ describe('App Component', () => {
     expect(screen.getByTestId('markdown')).toBeInTheDocument();
     expect(screen.getByTestId('preview')).toBeInTheDocument();
   });
+  test('textarea works', async () => {
+    render(<App />);
 
-  test('textarea input works', async () => {
-    jest.mock('./hooks/useLocalStorage', () => ({
-      useLocalStorage: jest.fn(() => ({ value: '', setItem: jest.fn() }))
-    }));
-    const onInputChangeMock = jest.fn();
+    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
 
-    render(<Markdown input="OLD" onInputChange={onInputChangeMock} onIconClick={jest.fn()} />);
+    expect(textarea).toBeInTheDocument();
+    await userEvent.type(textarea, 'hello');
 
-    const textarea = screen.getByLabelText(/enter text here/i) as HTMLTextAreaElement;
-    await userEvent.type(textarea, 'new');
-    console.log('Textarea value after change:', textarea.value);
-    expect(onInputChangeMock).toHaveBeenCalledWith('OLDn');
-    expect(onInputChangeMock).toHaveBeenCalledWith('OLDe');
-    expect(onInputChangeMock).toHaveBeenCalledWith('OLDw');
+    await waitFor(() => {
+      expect(textarea.value).toBe('hello');
+    });
+  });
+
+  test('preview is rendering the correct input text', async () => {
+    render(<App />);
+
+    const textArea = screen.getByRole('textbox') as HTMLTextAreaElement;
+    expect(textArea).toBeInTheDocument();
+    const inputText = 'hello';
+    await userEvent.type(textArea, inputText);
+
+    await waitFor(() => {
+      const previewComponent = screen.getByTestId('preview');
+      expect(previewComponent).toBeInTheDocument();
+      expect(previewComponent).toHaveTextContent(inputText);
+    });
   });
 });

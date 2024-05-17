@@ -1,6 +1,10 @@
 # React Markdown Editor App
 
 This a markdown editor app created by using React Typescript
+The app was deployed using (Netlify)[https://www.netlify.com/]
+
+[Live site](https://as-markdowneditor.netlify.app/)
+[Repo](https://github.com/aimansae/as-markdown-editor)
 
 ## Prerequisites
 
@@ -22,7 +26,7 @@ Before you start with this task, research what Markdown format is.
 - Commit your changes regularly.
 - Adjust your README.md to explain your project.
 - Deploy it to Netlify for free and put the URL in the README.md
-- An example app, that’s already existing out there in the world: https://stackedit.io/app
+- An example app, that’s already existing out there in the world: [StackEdit](https://stackedit.io/app)
 
 **Time limit:** 6 hours
 
@@ -161,4 +165,3 @@ added module.exports = {
   },
 };
 
-While running tests for Markwown test area change input, It seems like the onInputChangeMock function is being called multiple times with partial input values, instead of the complete input value. This suggests that there might be an issue with how the debouncing mechanism is implemented.

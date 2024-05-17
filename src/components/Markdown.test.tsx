@@ -4,24 +4,15 @@ import Markdown from './Markdown';
 import userEvent from '@testing-library/user-event';
 
 describe('Markdown component', () => {
-  test('textarea input works', async () => {
-    const inputMock = 'WTF';
-    const onInputChangeMock = jest.fn();
-    const onIconClickMock = jest.fn();
+  test('Markdown Renders', async () => {
+    const iconClickMock = jest.fn();
 
-    render(
-      <Markdown input={inputMock} onInputChange={onInputChangeMock} onIconClick={onIconClickMock} />
-    );
+    render(<Markdown onIconClick={iconClickMock} />);
+    expect(screen.getByTestId('markdown')).toBeInTheDocument();
+    expect(screen.getByTestId('heading')).toHaveTextContent(/markdown/i);
 
-    const textarea = screen.getByLabelText(/enter text here/i);
-    await userEvent.type(textarea, 'hello');
-
-    expect(textarea).toBeInTheDocument();
-
-    expect(onInputChangeMock).toHaveBeenCalledWith('WTFh');
-    expect(onInputChangeMock).toHaveBeenCalledWith('WTFe');
-    expect(onInputChangeMock).toHaveBeenCalledWith('WTFl');
-    expect(onInputChangeMock).toHaveBeenCalledWith('WTFl');
-    expect(onInputChangeMock).toHaveBeenCalledWith('WTFo');
+    const icon = screen.getByTestId('editIcon');
+    await userEvent.click(icon);
+    expect(iconClickMock).toHaveBeenCalledTimes(1);
   });
 });

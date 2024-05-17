@@ -8,7 +8,7 @@ type PreviewProps = {
 
 const Preview = ({ input, onIconClick }: PreviewProps) => {
   return (
-    <div data-testid='preview' className="flex flex-1 flex-col prose-a:text-blue-600 sm:w-1/2 h-full">
+    <div data-testid='preview' className="flex-col prose-a:text-blue-600 h-full">
       <Heading onIconClick={onIconClick} mode="preview">
         Preview
       </Heading>

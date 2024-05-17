@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Markdown from './components/Markdown';
 import Preview from './components/Preview';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -6,41 +6,32 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 function App() {
   const { value: input, setItem: setInput } = useLocalStorage('Input');
   const [showPreview, setShowPreview] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  const handleShowPreview = () => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+  };
+
+  const togglePreview = () => {
     setShowPreview((prevShowPreview) => !prevShowPreview);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      const smallScreen = window.innerWidth <= 640;
-      setIsSmallScreen(smallScreen);
-      setShowPreview(!smallScreen);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
-    <main className="flex min-h-screen bg-gray-200">
-      {isSmallScreen ? (
-        showPreview ? (
-          <Preview input={input} onIconClick={handleShowPreview} />
-        ) : (
-          <Markdown input={input} onInputChange={setInput} onIconClick={handleShowPreview} />
-        )
-      ) : (
-        <>
-          <Markdown input={input} onInputChange={setInput} onIconClick={handleShowPreview} />
-          <Preview input={input} onIconClick={handleShowPreview} />
-        </>
-      )}
+    <main className="flex min-h-screen bg-gray-200 sm:flex-row">
+      <div className={`w-full ${showPreview ? 'hidden' : 'block'} sm:block sm:w-1/2`}>
+        <Markdown onIconClick={togglePreview} />
+        {!showPreview && (
+          <textarea
+            autoFocus
+            id="textarea"
+            className="h-[calc(100%-44px)] w-full resize-none bg-gray-200 p-2 outline-none"
+            placeholder="Enter Markdown here..."
+            value={input}
+            onChange={handleChange}></textarea>
+        )}
+      </div>
+      <div className={`w-full ${showPreview ? 'block' : 'hidden'} sm:block sm:w-1/2`}>
+        <Preview input={input} onIconClick={togglePreview} />
+      </div>
     </main>
   );
 }
