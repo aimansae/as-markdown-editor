@@ -14,29 +14,13 @@ describe('App Component', () => {
     });
   });
 
-  test('renders Markdown and Preview', async () => {
-    render(<App />);
-    expect(screen.getByTestId('preview')).toBeInTheDocument();
-    expect(screen.getByTestId('markdown')).toBeInTheDocument();
-
-    await screen.findByTestId('markdown');
-    await screen.findByTestId('preview');
-
-    expect(screen.getByTestId('markdown')).toBeInTheDocument();
-    expect(screen.getByTestId('preview')).toBeInTheDocument();
-  });
-  test('textarea works', async () => {
+  test('renders Editor and Preview', async () => {
     render(<App />);
 
-    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
-
-    expect(textarea).toBeInTheDocument();
-    await userEvent.type(textarea, 'hello');
-
-    await waitFor(() => {
-      expect(textarea.value).toBe('hello');
-    });
+    expect(screen.getByTestId('preview')).toBeInTheDocument();
+    expect(screen.getByTestId('editor')).toBeInTheDocument();
   });
+
 
   test('preview is rendering the correct input text', async () => {
     render(<App />);

@@ -1,5 +1,5 @@
 import ReactMarkdown from 'react-markdown';
-import Heading from './Heading';
+import Header from './Header';
 
 type PreviewProps = {
   input: string;
@@ -8,19 +8,13 @@ type PreviewProps = {
 
 const Preview = ({ input, onIconClick }: PreviewProps) => {
   return (
-    <div data-testid='preview' className="flex-col prose-a:text-blue-600 h-full">
-      <Heading onIconClick={onIconClick} mode="preview">
+    <div data-testid="preview" className="h-full flex-col prose-a:text-blue-600">
+      <Header onIconClick={onIconClick} mode="preview">
         Preview
-      </Heading>
-      {input.trim().length === 0 ? (
-        <div className="prose p-2 ">
-          <p>Type something in Markdown..</p>
-        </div>
-      ) : (
-        <div className="prose p-2 ">
-          <ReactMarkdown>{input}</ReactMarkdown>
-        </div>
-      )}
+      </Header>
+      <div className="prose p-2 ">
+        <ReactMarkdown>{input}</ReactMarkdown>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import Markdown from './components/Markdown';
+import Editor from './components/Editor';
 import Preview from './components/Preview';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
@@ -18,7 +18,8 @@ function App() {
   return (
     <main className="flex min-h-screen bg-gray-200 sm:flex-row">
       <div className={`w-full ${showPreview ? 'hidden' : 'block'} sm:block sm:w-1/2`}>
-        <Markdown onIconClick={togglePreview} />
+        <Editor onIconClick={togglePreview} input={input} onInputChange={handleChange} ></Editor>
+        {/* <Editor onIconClick={togglePreview} />
         {!showPreview && (
           <textarea
             autoFocus
@@ -27,7 +28,7 @@ function App() {
             placeholder="Enter Markdown here..."
             value={input}
             onChange={handleChange}></textarea>
-        )}
+        )} */}
       </div>
       <div className={`w-full ${showPreview ? 'block' : 'hidden'} sm:block sm:w-1/2`}>
         <Preview input={input} onIconClick={togglePreview} />

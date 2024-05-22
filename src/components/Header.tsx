@@ -8,7 +8,7 @@ type HeadingProps = {
   mode: 'edit' | 'preview';
 };
 
-const Heading = ({ children, onIconClick, mode }: HeadingProps) => {
+const Header = ({ children, onIconClick, mode }: HeadingProps) => {
   return (
     <header
       data-testid="heading"
@@ -36,4 +36,4 @@ const Heading = ({ children, onIconClick, mode }: HeadingProps) => {
     </header>
   );
 };
-export default Heading;
+export default Header;

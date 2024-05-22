@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import Heading from './Heading';
+import Header from './Header';
 
 describe('Heading component', () => {
   test('renders edit mode', async () => {
     const onClickMock = jest.fn();
 
     render(
-      <Heading onIconClick={onClickMock} mode="edit">
+      <Header onIconClick={onClickMock} mode="edit">
         Markdown
-      </Heading>
+      </Header>
     );
 
     const editIcon = screen.getByTestId('editIcon');
@@ -25,9 +25,9 @@ describe('Heading component', () => {
     const onClickMock = jest.fn();
 
     render(
-      <Heading onIconClick={onClickMock} mode="preview">
+      <Header onIconClick={onClickMock} mode="preview">
         Preview
-      </Heading>
+      </Header>
     );
 
     const previewIcon = screen.getByTestId('previewIcon');
