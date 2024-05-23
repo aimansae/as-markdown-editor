@@ -18,17 +18,7 @@ function App() {
   return (
     <main className="flex min-h-screen bg-gray-200 sm:flex-row">
       <div className={`w-full ${showPreview ? 'hidden' : 'block'} sm:block sm:w-1/2`}>
-        <Editor onIconClick={togglePreview} input={input} onInputChange={handleChange} ></Editor>
-        {/* <Editor onIconClick={togglePreview} />
-        {!showPreview && (
-          <textarea
-            autoFocus
-            id="textarea"
-            className="h-[calc(100%-44px)] w-full resize-none bg-gray-200 p-2 outline-none"
-            placeholder="Enter Markdown here..."
-            value={input}
-            onChange={handleChange}></textarea>
-        )} */}
+        <Editor onIconClick={togglePreview} input={input} onInputChange={handleChange}></Editor>
       </div>
       <div className={`w-full ${showPreview ? 'block' : 'hidden'} sm:block sm:w-1/2`}>
         <Preview input={input} onIconClick={togglePreview} />
