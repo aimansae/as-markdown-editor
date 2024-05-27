@@ -12,7 +12,7 @@ const Preview = ({ input, onIconClick }: PreviewProps) => {
       <Header onIconClick={onIconClick} mode="preview">
         Preview
       </Header>
-      <div className="prose p-2 ">
+      <div className="prose h-full flex-col bg-gray-200 p-2">
         <ReactMarkdown>{input}</ReactMarkdown>
       </div>
     </div>
