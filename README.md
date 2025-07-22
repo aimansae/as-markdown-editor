@@ -6,7 +6,7 @@ The app was deployed using [Netlify](https://www.netlify.com/).
 Please find my [Live site](https://as-markdowneditor.netlify.app/) and Github [Repo](https://github.com/aimansae/as-markdown-editor).
 
 
-![App Preview](/react-starter-project/public/assets/amIResponsive.PNG)
+![App Preview](public/assets/amIResponsive.PNG)
 
 ## Prerequisites
 
@@ -153,7 +153,7 @@ make sure to update your package.json to include it as a transform module.
 
 
 - While running npm test encountered the followed error
-![Jest Error](/react-starter-project/public/assets/markdown-error.PNG)
+![Jest Error](public/assets/markdown-error.PNG)
 
 **Fixed** 
 
