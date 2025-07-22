@@ -1,14 +1,16 @@
 # React Markdown Editor App
 
-This a markdown editor app created by using React Typescript
-The app was deployed using (Netlify)[https://www.netlify.com/]
+This a markdown editor app created by using React Typescript.
+The app was deployed using [Netlify](https://www.netlify.com/).
 
-[Live site](https://as-markdowneditor.netlify.app/)
-[Repo](https://github.com/aimansae/as-markdown-editor)
+Please find my [Live site](https://as-markdowneditor.netlify.app/) and Github [Repo](https://github.com/aimansae/as-markdown-editor).
+
+
+![App Preview](/react-starter-project/src//assets/amIResponsive.PNG)
 
 ## Prerequisites
 
-Before you start with this task, research what Markdown format is.
+Tips from my mentor: Before you start with this task, research what Markdown format is.
 
 ## Requirements
 
@@ -16,8 +18,8 @@ Before you start with this task, research what Markdown format is.
 - Create a new repository and push the starter as initial commit.
 - Pick a styling solution of your choice. (CSS, SCSS, Modules, Tailwind, Styled components, Emotion)
 - Implement the UI. Implement a side by side view. On the left side you enter/edit the markdown. On the right side you see the output which is updated as you type, rendered correctly as valid HTML.
-  Keep it simple, it doesn’t have to be fully featured.
-  You are allowed to use any library of your choice, which will parse the markdown automatically for you. If you decide not to, and parse it yourself, add support for at least: h1-h6, p, ul > li, strong and <a>
+- Keep it simple, it doesn’t have to be fully featured.
+- You are allowed to use any library of your choice, which will parse the markdown automatically for you. If you decide not to, and parse it yourself, add support for at least: h1-h6, p, ul > li, strong and `<a>`
 - Make sure the design is responsive. On mobile simply show either of the sides and make it switchable via button somewhere.
 
 ## Additional requirements
@@ -26,13 +28,14 @@ Before you start with this task, research what Markdown format is.
 - Commit your changes regularly.
 - Adjust your README.md to explain your project.
 - Deploy it to Netlify for free and put the URL in the README.md
-- An example app, that’s already existing out there in the world: [StackEdit](https://stackedit.io/app)
+- An example app, that’s already existing out there in the world: 
+[StackEdit](https://stackedit.io/app)
 
 **Time limit:** 6 hours
 
 ## Getting Started
 
-## [Cloning](https://www.youtube.com/watch?v=i8KuDon82KM&ab_channel=h3webdevtuts) from an existing starter project
+### [Cloning](https://www.youtube.com/watch?v=i8KuDon82KM&ab_channel=h3webdevtuts) from an existing starter project
 
 1. Open VsCode
 2. Click on Menu, View, Command Palette (Ctrl+Shift+P)
@@ -45,14 +48,14 @@ Before you start with this task, research what Markdown format is.
 
 1. Create a local folder and connect it to [Github](https://github.com/)
 
-1. Open github and create new repository
-1. Copy the link and in terminal add:
+2. Open github and create new repository - Copy the link and in terminal add:
 
-- git add .
-- git commit -m 'Initial commit'
-- git remote remove origin
-- git remote add origin (paste the link to the Github repo here)
-- git push origin master
+git init
+git remote remove origin
+git remote add origin <your-repo-link>
+git add .
+git commit -m "Initial commit"
+git push -u origin master
 
 3. If needed Enter credentials to connect the IDE to Github
 4. Resources found on [Youtube](https://www.youtube.com/watch?v=vbQ2bYHxxEA)
@@ -84,14 +87,24 @@ Before you start with this task, research what Markdown format is.
 In tailwind.config.css add:
 plugins: [require('@tailwindcss/typography')]
 
-## [React markdown package](https://www.npmjs.com/package/react-markdown/v/8.0.6)
+### [React markdown package](https://www.npmjs.com/package/react-markdown/v/8.0.6)
 
 npm i react-markdown
 
 ### [Testing user event](https://testing-library.com/docs/user-event/install)
 npm install --save-dev @testing-library/user-event
 
-### TroubleShooting
+
+## Technologies Used
+- React with TypeScript – for building reusable UI components and ensuring type safety
+- Vite – for a fast and modern build setup
+- Tailwind CSS – for utility-first styling and responsive design
+- React Markdown – to parse and render Markdown syntax
+- Jest & React Testing Library – for writing and running unit tests
+- Netlify – for deployment
+- Prettier + Tailwind Plugin – for code formatting and class ordering
+
+### Testing & Troubleshooting
 
 - While running npm test encountered error:
 ReferenceError: require is not defined in ES module scope, you can use import instead
@@ -165,3 +178,20 @@ added module.exports = {
   },
 };
 
+### Future Features
+
+- Dark mode toggle
+- Save/load markdown drafts from localStorage
+- Download markdown as .md file
+- Toolbar with formatting buttons (bold, italic, link, heading)
+- Live word/character count
+- Export as PDF or HTML
+- Collaborative editing using WebSockets or Firebase
+- Accessibility improvements (screen reader support)
+
+### Resources & Inspiration
+- [React Markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6)
+- [StackEdit](https://stackedit.io/)
+- A special thanks to my mentor Amal K. who guided me through the development process and provided valuable feedback on the project. Your support and insights made a big difference!
+
+ 
