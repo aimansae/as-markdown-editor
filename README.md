@@ -8,6 +8,16 @@ Please find my [Live site](https://as-markdowneditor.netlify.app/) and Github [R
 
 ![App Preview](public/assets/amIResponsive.PNG)
 
+- [Prerequisites](#prerequisites)
+- [Requirements](#requirements)
+- [Additional Requirements](#additional-requirements)
+- [Challenges](#challenges)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Github Setup](#github-setup)
+- [Testing and Troubleshooting](#testing-and-troubleshooting)
+- [Future Features](#future-features)
+- [Resources and Inspiration](#resources-and-inspiration)
 ## Prerequisites
 
 Tips from my mentor: Before you start with this task, research what Markdown format is.
@@ -33,6 +43,49 @@ Tips from my mentor: Before you start with this task, research what Markdown for
 
 **Time limit:** 6 hours
 
+## Challenges
+
+1. Understanding react-markdown:
+Integrating the react-markdown package wasn’t as straightforward as expected. It took time to understand:
+How it parses and safely renders Markdown content as React components
+The correct way to pass the input string using {children}:
+
+```bash
+<ReactMarkdown>{input}</ReactMarkdown>
+```
+Styling limitations inside Markdown (prose, prose-a:text-blue-600) and how Tailwind interacts with it
+
+2. Building a Side-by-Side Editor & Preview
+Creating a seamless side-by-side Markdown editor and preview panel brought UI and logic challenges:
+I had to manage layout responsiveness (especially stacking on mobile)
+I implemented a layout that displays the Markdown input on one side and the live rendered preview on the other
+
+3. Toggling Between Editor and Preview
+It was tricky to handle state transitions between the editor and preview modes. I used a state flag and conditional rendering to:
+- Show/hide the preview or editor
+- Allow interaction with an icon button inside the Header component
+- Keep the Markdown input in sync with both views
+
+Example:
+
+```bash
+<Header onIconClick={onIconClick} mode="preview">
+  Preview
+</Header> 
+
+```
+4. Maintaining Markdown Input Consistency
+While switching between views, I had to ensure the Markdown input remained preserved and updated without loss of content or formatting — especially when editing rich content like links, headings, or lists.
+
+## Technologies Used
+- [React](https://react.dev/) with [TypeScript](https://react.dev/learn/typescript) – for building reusable UI components and ensuring type safety
+- [Vite](https://vite.dev/guide/) – for a fast and modern build setup
+- [Tailwind CSS](https://v3.tailwindcss.com/docs/guides/create-react-app) – for utility-first styling and responsive design
+- [React Markdown](https://www.npmjs.com/package/react-markdown) – to parse and render Markdown syntax
+- [Jest & React Testing Library](https://jestjs.io/docs/tutorial-react) – for writing and running unit tests
+- [Netlify](https://app.netlify.com/) – for deployment
+- [Prettier + Tailwind Plugin](https://dev.to/tsamaya/eslint-and-prettier-configuration-for-react-project-2gij) – for code formatting and class ordering
+
 ## Getting Started
 
 ### [Cloning](https://www.youtube.com/watch?v=i8KuDon82KM&ab_channel=h3webdevtuts) from an existing starter project
@@ -49,20 +102,21 @@ Tips from my mentor: Before you start with this task, research what Markdown for
 1. Create a local folder and connect it to [Github](https://github.com/)
 
 2. Open github and create new repository - Copy the link and in terminal add:
-
+```bash
 git init
 git remote remove origin
 git remote add origin <your-repo-link>
 git add .
 git commit -m "Initial commit"
 git push -u origin master
-
+```
 3. If needed Enter credentials to connect the IDE to Github
 4. Resources found on [Youtube](https://www.youtube.com/watch?v=vbQ2bYHxxEA)
 
 ### [Tailwind Installation](https://tailwindcss.com/docs/guides/vite)
 
 1. In terminal type:
+```bash
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p (creates tailwind.config.js file)
 
@@ -94,17 +148,9 @@ npm i react-markdown
 ### [Testing user event](https://testing-library.com/docs/user-event/install)
 npm install --save-dev @testing-library/user-event
 
+```
 
-## Technologies Used
-- React with TypeScript – for building reusable UI components and ensuring type safety
-- Vite – for a fast and modern build setup
-- Tailwind CSS – for utility-first styling and responsive design
-- React Markdown – to parse and render Markdown syntax
-- Jest & React Testing Library – for writing and running unit tests
-- Netlify – for deployment
-- Prettier + Tailwind Plugin – for code formatting and class ordering
-
-### Testing & Troubleshooting
+## Testing and Troubleshooting
 
 - While running npm test encountered error:
 ReferenceError: require is not defined in ES module scope, you can use import instead
@@ -189,7 +235,7 @@ added module.exports = {
 - Collaborative editing using WebSockets or Firebase
 - Accessibility improvements (screen reader support)
 
-### Resources & Inspiration
+### Resources and Inspiration
 - [React Markdown](https://www.npmjs.com/package/react-markdown/v/8.0.6)
 - [StackEdit](https://stackedit.io/)
 - A special thanks to my mentor Amal K. who guided me through the development process and provided valuable feedback on the project. Your support and insights made a big difference!
